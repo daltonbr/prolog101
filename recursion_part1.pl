@@ -2,10 +2,14 @@
 % PART 1
 
 % member(3,[5,4,2], true).
-member(_,[],false). % empty list has no member
-member(X, [X|_],true). % true when the first element is X
-member(X,[_|T],true) :- member(X,T,true). % when X!=H, look at X in T
-member(_,_,false). % did not find X in T
+% No need to use a boolean variable
+% member(_,[],false). % empty list has no member
+% member(X, [X|_],true). % true when the first element is X
+% member(X,[_|T],true) :- member(X,T,true). % when X!=H, look at X in T
+% member(_,_,false). % did not find X in T
+
+member([X|_], X) :- !.
+member([_|T], X) :- member(T, X).
 
 % length1([1,7,3,5],N). % >>> N = 4
 length1(L,N) :- length2(L,0,N). % fassade starts Acc as 0
