@@ -24,6 +24,11 @@ twice([H|T], [TimesTwo|R]) :-
   TimesTwo is (H*2),
   twice(T,R).
 
+% twice using ACCUMULATOR
+twice_([], T, T).
+twice_([H|T], R, L) :- H1 is H*2, twice_(T, [H1|R], L).
+twice([H|T], N) :- twice_([H|T], [], R), reverse(R, N).
+
 % removeFirst(3,[4,2,8,3,5,2,3],N). %>>> N = [4,2,8,5,2,3]
 removeFirst(_,[],[]).
 removeFirst(X,[X|T],T).
