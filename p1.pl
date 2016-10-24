@@ -30,7 +30,24 @@ twice([H|T], [H1|T1]) :- H1 is H * 2, twice(T,T1).
 
 % sum2 [1,3,5] >>> 9 - [not working - Dalton]
 sum2([],0).
-sum2([H|T],L) :- L is L1 + H, sum(T,L1).
+sum2([H|T],L) :- L is L1 + H, sum(T,L1). % The part "L is L1 + H" should come after recursion call. Just like below
+
+% sum function - [tested - Bruno]
+sum([], 0).
+sum([H|T], M) :- sum(T, M1), M is M1+H.
+
+% removeFirst function - [tested - Bruno]
+removeFirst(_, [], []).
+removeFirst(H, [H|T], T) :- !.
+removeFirst(H, [H1|T], [H1|T1]) :- removeFirst(H, T, T1).
+
+% stammer function - [tested - Bruno]
+stammer([], []).
+stammer([H|T], [H,H|T1]) :- stammer(T, T1).
+
+% listRef function - [tested - Bruno]
+listRef(0, [H|_], H).
+listRef(A, [_|T], X) :- B is A-1, listRef(B, T, X).
 
 % count 'b' ['a', 'b', 'b', c'] >>> 2
 
