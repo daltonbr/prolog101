@@ -29,21 +29,17 @@ removeFirst(_,[],[]).
 removeFirst(X,[X|T],T).
 removeFirst(X,[H|T],[H|R]) :- removeFirst(X,T,R).
 
-% allOdd([3,5,7,1],N). %>>> N = true
+% allOdd([3,5,7,1]). %>>> true
 odd(N) :- 1 is N mod 2.
-allOdd([],true).
-allOdd([H|T],true) :- odd(H), allOdd(T,true).
-allOdd(_,false).
+allOdd([]).
+allOdd([H|T]) :- odd(H), allOdd(T).
 
-% andMap(odd,[1,7,5,9], N). %>>> N = true
-andMap(_,[],true).
-andMap(X,[H|T],true) :- call(X,H), andMap(X,T,true).
-andMap(_,_,false).
+% andMap(odd,[1,7,5,9]). %>>> true
+andMap(_,[]).
+andMap(X,[H|T]) :- call(X,H), andMap(X,T).
 
-% some(odd,[2,4,6,8,9],N). %>>> N = true
-some(_,[],false).
-some(X,[H|T],true) :- call(X,H); some(X,T,true).
-some(_,_,false).
+% some(odd,[2,4,6,8,9]). %>>> true
+some(X,[H|T]) :- call(X,H); some(X,T).
 
 % sum([6,5,4],N). %>>> N = 15
 sum([],0).
