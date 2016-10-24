@@ -29,7 +29,7 @@ tio(X, Y) :- filho(Z,X),
              filho(Z,W),
              filho(W,Y),
              not(X=Y),
-    		     not(X=W),!.
+    		     not(X=W).
 
 ancestral(X, Y) :- filho(X, Y).
 ancestral(X, Y) :- filho(X, Z),ancestral(Z,Y).
