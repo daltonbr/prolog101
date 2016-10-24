@@ -1,6 +1,8 @@
 filho(washingthon, bruno).
 filho(washingthon, felipe).
 filho(wellington, natalia).
+filho(felipe,euclisio).
+filho(natalia,ronaldo).
 filho(wellington, aline).
 filho(walid, kaled).
 filho(walid, yasmin).
@@ -11,14 +13,23 @@ filho(jose, walid).
 
 pai(X, Y) :- filho(Y, X).
 
-avo(X, Y) :- pai(X, W), 
+avo(X, Y) :- pai(X, W),
              pai(W, Y).
 
-irmao(X, Y) :- pai(X, W), 
+irmao(X, Y) :- pai(X, W),
                filho(W, Y),
                not(Y=X).
 
-primo(X, Y) :- pai(X, A), 
-               irmao(A, B), 
+primo(X, Y) :- pai(X, A),
+               irmao(A, B),
                filho(B, Y),
                not(Y=X).
+
+tio(X, Y) :- filho(Z,X),
+             filho(Z,W),
+             filho(W,Y),
+             not(X=Y),
+    		     not(X=W),!.
+
+ancestral(X, Y) :- filho(X, Y).
+ancestral(X, Y) :- filho(X, Z),ancestral(Z,Y).
