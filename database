@@ -1,0 +1,24 @@
+filho(washingthon, bruno).
+filho(washingthon, felipe).
+filho(wellington, natalia).
+filho(wellington, aline).
+filho(walid, kaled).
+filho(walid, yasmin).
+filho(walid, samara).
+filho(euclides, washingthon).
+filho(euclides, wellington).
+filho(jose, walid).
+
+pai(X, Y) :- filho(Y, X).
+
+avo(X, Y) :- pai(X, W), 
+             pai(W, Y).
+
+irmao(X, Y) :- pai(X, W), 
+               filho(W, Y),
+               not(Y=X).
+
+primo(X, Y) :- pai(X, A), 
+               irmao(A, B), 
+               filho(B, Y),
+               not(Y=X).
